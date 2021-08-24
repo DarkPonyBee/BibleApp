@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, FlatList, TouchableOpacity, ScrollView} from 'react-native';
+import {HomeStackNavProps} from '../../../navigation/StackParamList';
 import {styles} from './style';
 
 const bookList = [
@@ -37,8 +38,14 @@ interface IBook {
   count: number;
 }
 
-export const HomeScreen = () => {
+export const HomeScreen: React.FC<HomeStackNavProps<'Home'>> = ({
+  navigation,
+}) => {
   const [selectedBook, setSelectedBook] = useState('');
+
+  const handleChapterClick = () => {
+    navigation.navigate('Chapter');
+  };
 
   const renderChapters = (item: IBook) => {
     return (
@@ -46,7 +53,9 @@ export const HomeScreen = () => {
         {Array(item.count)
           .fill(1)
           .map((value, index) => (
-            <TouchableOpacity style={styles.chapterTitleContainer}>
+            <TouchableOpacity
+              style={styles.chapterTitleContainer}
+              onPress={handleChapterClick}>
               <Text style={styles.chapterTitle}>{index + 1}</Text>
             </TouchableOpacity>
           ))}
