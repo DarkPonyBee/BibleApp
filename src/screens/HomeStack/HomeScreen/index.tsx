@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {View, Text, FlatList, TouchableOpacity, ScrollView} from 'react-native';
+import {useDispatch} from 'react-redux';
 import {HomeStackNavProps} from '../../../navigation/StackParamList';
+import {actions} from '../../../store';
 import {styles} from './style';
 
 const bookList = [
@@ -42,9 +44,11 @@ export const HomeScreen: React.FC<HomeStackNavProps<'Home'>> = ({
   navigation,
 }) => {
   const [selectedBook, setSelectedBook] = useState('');
+  const dispatch = useDispatch();
 
-  const handleChapterClick = () => {
-    navigation.navigate('Chapter');
+  const handleChapterClick = (title: string, chapter: number) => {
+    navigation.navigate('Chapter', {title, chapter});
+    dispatch(actions.addToFavorites(title, chapter));
   };
 
   const renderChapters = (item: IBook) => {
@@ -55,7 +59,7 @@ export const HomeScreen: React.FC<HomeStackNavProps<'Home'>> = ({
           .map((value, index) => (
             <TouchableOpacity
               style={styles.chapterTitleContainer}
-              onPress={handleChapterClick}>
+              onPress={() => handleChapterClick(item.title, index + 1)}>
               <Text style={styles.chapterTitle}>{index + 1}</Text>
             </TouchableOpacity>
           ))}

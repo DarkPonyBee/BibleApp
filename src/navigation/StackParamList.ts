@@ -14,7 +14,7 @@ export type MainTabsNavProps<T extends keyof MainTabsParamList> = {
 
 export type HomeStackParamList = {
   Home: undefined;
-  Chapter: undefined;
+  Chapter: {title: string; chapter: number};
 };
 
 export type HomeStackNavProps<T extends keyof HomeStackParamList> = {
