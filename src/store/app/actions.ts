@@ -1,4 +1,5 @@
 import {AnyAction} from 'redux';
+import {Bible} from '../../types';
 
 import ACTION_TYPES from '../actionTypes';
 
@@ -12,7 +13,7 @@ export const fetchBible = (title: string, chapter: number): AnyAction => ({
   payload: {title, chapter},
 });
 
-export const fetchBibleSuccess = (payload): AnyAction => ({
+export const fetchBibleSuccess = (payload: Bible): AnyAction => ({
   type: ACTION_TYPES.FETCH_BIBLE_SUCCESS,
   payload: payload,
 });

@@ -1,6 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import {IChapter} from '../types';
 
 export type MainTabsParamList = {
   HomeStack: NavigatorScreenParams<HomeStackParamList>;
@@ -14,7 +15,7 @@ export type MainTabsNavProps<T extends keyof MainTabsParamList> = {
 
 export type HomeStackParamList = {
   Home: undefined;
-  Chapter: {title: string; chapter: number};
+  Chapter: IChapter;
 };
 
 export type HomeStackNavProps<T extends keyof HomeStackParamList> = {

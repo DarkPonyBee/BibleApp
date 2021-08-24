@@ -10,7 +10,7 @@ const Stack = createStackNavigator<HomeStackParamList>();
 
 function HomeStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Chapter" component={ChapterScreen} />
     </Stack.Navigator>
@@ -20,7 +20,7 @@ function HomeStack() {
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator screenOptions={{headerShown: false}}>
         <Tab.Screen name="HomeStack" component={HomeStack} />
         <Tab.Screen name="Favorites" component={FavoritesScreen} />
       </Tab.Navigator>

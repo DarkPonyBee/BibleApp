@@ -6,6 +6,10 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 12,
   },
+  screenHeader: {
+    fontSize: 28,
+    fontWeight: '800',
+  },
   title: {
     fontSize: 24,
   },

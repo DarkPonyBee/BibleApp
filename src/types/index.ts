@@ -13,13 +13,7 @@ export interface AppState {
 
 export interface Bible {
   reference: string;
-  verses: {
-    book_id: string;
-    book_name: string;
-    chapter: number;
-    verse: number;
-    text: string;
-  }[];
+  verses: IVerses[];
   text: string;
   translation_id: string;
   translation_name: string;
@@ -29,4 +23,12 @@ export interface Bible {
 export interface IChapter {
   title: string;
   chapter: number;
+}
+
+export interface IVerses {
+  book_id: string;
+  book_name: string;
+  chapter: number;
+  verse: number;
+  text: string;
 }

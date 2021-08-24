@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {View, Text, FlatList, TouchableOpacity, ScrollView} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {HomeStackNavProps} from '../../../navigation/StackParamList';
 import {actions} from '../../../store';
+import {getFavorites} from '../../../store/selectors';
 import {styles} from './style';
 
 const bookList = [
@@ -45,6 +46,7 @@ export const HomeScreen: React.FC<HomeStackNavProps<'Home'>> = ({
 }) => {
   const [selectedBook, setSelectedBook] = useState('');
   const dispatch = useDispatch();
+  const favorites = useSelector(getFavorites);
 
   const handleChapterClick = (title: string, chapter: number) => {
     navigation.navigate('Chapter', {title, chapter});
@@ -58,7 +60,15 @@ export const HomeScreen: React.FC<HomeStackNavProps<'Home'>> = ({
           .fill(1)
           .map((value, index) => (
             <TouchableOpacity
-              style={styles.chapterTitleContainer}
+              style={
+                favorites.some(
+                  element =>
+                    element.title === item.title &&
+                    element.chapter === index + 1,
+                )
+                  ? [styles.chapterTitleContainer, styles.highlight]
+                  : styles.chapterTitleContainer
+              }
               onPress={() => handleChapterClick(item.title, index + 1)}>
               <Text style={styles.chapterTitle}>{index + 1}</Text>
             </TouchableOpacity>
@@ -80,8 +90,8 @@ export const HomeScreen: React.FC<HomeStackNavProps<'Home'>> = ({
   };
 
   return (
-    <View style={{flex: 1, justifyContent: 'center'}}>
-      <Text>Home1!</Text>
+    <View style={styles.container}>
+      <Text style={styles.screenHeader}>Book List</Text>
       <FlatList data={bookList} renderItem={renderBookItem} />
     </View>
   );

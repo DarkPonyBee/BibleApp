@@ -26,6 +26,7 @@ export const FavoritesScreen: React.FC<MainTabsNavProps<'Favorites'>> = ({
 
   return (
     <View style={styles.container}>
+      <Text style={styles.screenHeader}>My List</Text>
       <FlatList data={favorites} renderItem={renderItem} />
     </View>
   );
